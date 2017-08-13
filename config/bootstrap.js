@@ -11,6 +11,20 @@
 
 module.exports.bootstrap = function(cb) {
 
+  Review.create([{
+    text: 'I love it there'
+  }, {
+    text: 'iced tea is awesome there'
+  }]).exec(function (err, result) {
+
+      if (err) {
+        //something bad happened
+      } else {
+        //handle success case
+      }
+
+  });
+
   // It's very important to trigger this callback method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   cb();
