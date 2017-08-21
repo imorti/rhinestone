@@ -1,9 +1,19 @@
 
   angular.module('Review', []);
-  angular.module('Review').controller('BaseCtrl', ['$scope', '$http', function($scope, $http) {
+  angular.module('Review').controller('BaseCtrl', ['$scope', function($scope) {
 
-    $http.get('/review').then(function (res) {
-      $scope.reviews = res.data;
+    io.socket.get('/review', function (data) {
+      $scope.reviews = data;
+      $scope.$apply();
+    });
+
+    io.socket.on('review', function (event) {
+      switch (event.verb) {
+        case 'created':
+          $scope.reviews.push(event.data);
+          $scope.$apply();
+          break;
+      }
     });
 
   }]);
