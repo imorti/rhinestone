@@ -11,6 +11,7 @@
 
 module.exports.bootstrap = function(cb) {
 
+  //Sets up review data 
   Review.create([{
     text: 'I love it there'
   }, {
